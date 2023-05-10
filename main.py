@@ -1,10 +1,12 @@
 import psutil
 
+
 def get_cpu_usage(interval):
     """
     Returns the current CPU usage percentage.
     """
     return psutil.cpu_percent(interval=interval)
+
 
 def register_into_log(log_file, interval):
     """
@@ -16,6 +18,7 @@ def register_into_log(log_file, interval):
         f.write(f"{timestamp} ")
         f.write(f"{cpu_usage}\n")
     print(f"CPU usage: {cpu_usage}% (interval: {interval}s)")
+
 
 def main():
     import influxdb_client, os, time
@@ -41,6 +44,7 @@ def main():
         write_api.write(bucket=bucket, org="Kentucky Fried Chicken", record=point)
         time.sleep(1)  # separate points by 1 second
 
+
 if __name__ == '__main__':
     # # Register the CPU usage at 1-second intervals
     # register_into_log("log.txt", 1)
@@ -50,5 +54,4 @@ if __name__ == '__main__':
     #
     # # Register the CPU usage at 6-second intervals
     # register_into_log("log.txt", 6)
-
-
+    main()
